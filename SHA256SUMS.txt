@@ -1,0 +1,2 @@
+2613992d5d56c527d515348dd3b3ace6c7134a73a621f92c2da5b3016a13044a  yuketang-copy-helper.user.js
+e1f5eeafbaa1b906c264da336e0fbdbf9feece2c4d1ca4da93fe5cae06719cf3  yuketang-font-deobfuscator-copy.user.js
