@@ -6,8 +6,8 @@
 
 | 版本 | 适用情况 | 安装链接 |
 | --- | --- | --- |
-| 独立版 1.0.1 | 已有可正常工作的字体反混淆脚本，或复制内容本来就是正常中文 | [安装拖选复制独立版](https://raw.githubusercontent.com/TySchip/yuketang-copy-helper/main/yuketang-copy-helper.user.js) |
-| 整合版 1.0.1 | 希望一个脚本同时完成字体还原和解除拖选限制 | [安装字体还原与拖选复制整合版](https://raw.githubusercontent.com/TySchip/yuketang-copy-helper/main/yuketang-font-deobfuscator-copy.user.js) |
+| 独立版 1.0.2 | 已有可正常工作的字体反混淆脚本，或复制内容本来就是正常中文 | [安装拖选复制独立版](https://raw.githubusercontent.com/TySchip/yuketang-copy-helper/main/yuketang-copy-helper.user.js) |
+| 整合版 1.0.2 | 希望一个脚本同时完成字体还原和解除拖选限制 | [安装字体还原与拖选复制整合版](https://raw.githubusercontent.com/TySchip/yuketang-copy-helper/main/yuketang-font-deobfuscator-copy.user.js) |
 
 1. 安装并启用 [Tampermonkey](https://www.tampermonkey.net/)。已经安装则跳过。
 2. 点击上面的安装链接，在 Tampermonkey 界面确认安装或更新。
@@ -32,14 +32,16 @@
 
 已检查的雨课堂题目位于 `iframe#iframeExerciseId` 内，选项使用 Element UI 的 `label.el-radio`。选项及内部文字计算得到的 `user-select` 为 `none`。
 
+多选题使用另一组元素：`label.el-checkbox`、`.el-checkbox__label` 与 `.checkboxText`。1.0.1 只覆盖了单选容器，遗漏多选容器，导致题干和单选可复制、多选选项仍无法拖选。1.0.2 已将多选容器及其后代加入覆盖范围。
+
 本项目在题目所在文档中添加一个 `<style id="ykt-copy-style">`，覆盖题干与选项的选中样式：
 
 ```css
-.problem-body, .problem-body *, .el-radio, .el-radio * {
+.problem-body, .problem-body *, .el-radio, .el-radio *, .el-checkbox, .el-checkbox * {
   user-select: text !important;
   -webkit-user-select: text !important;
 }
-.radioText { cursor: text !important; }
+.radioText, .checkboxText { cursor: text !important; }
 ```
 
 代码不清除 `click`、`mousedown`、`copy` 等事件，不改按钮的 `disabled`、`checked` 或答案数据。普通点击仍遵循网页原有的答题逻辑；脚本本身不选择答案或提交作业。
@@ -70,6 +72,8 @@
 ## 验证记录与本地检查
 
 2026-10-24，在实际雨课堂页面定位到选项的 `user-select: none`。覆盖 CSS 后，使用者确认鼠标拖选与正常中文复制均成功。这项实测针对所检查的页面；脚本管理器中的安装更新及其他课程页面仍需按下列步骤核验。
+
+2026-11-23，根据使用者提供的多选选项 HTML 确认 `.el-checkbox` / `.checkboxText` 与旧版选择器不匹配，修复这项遗漏。更新仅涉及版本号和 CSS，未改字体处理、答案状态或事件；当前多选页面的实际拖选与剪贴板结果仍待安装更新后核验。
 
 安装后的检查方法：
 

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         雨课堂字体混淆反混淆
 // @namespace    yuketang-font-deobfuscator
-// @version      1.0.1
+// @version      1.0.2
 // @description  实时解析雨课堂字体混淆，并支持题干和选项鼠标拖选复制
 // @author       GLM-5.1 & DeepSeek-V4-Pro in Trae CN
 // @homepageURL  https://github.com/TySchip/yuketang-copy-helper
@@ -857,11 +857,11 @@
         const selectionStyleEl = document.createElement('style');
         selectionStyleEl.id = 'ykt-copy-style';
         selectionStyleEl.textContent = [
-            '.problem-body, .problem-body *, .el-radio, .el-radio * {',
+            '.problem-body, .problem-body *, .el-radio, .el-radio *, .el-checkbox, .el-checkbox * {',
             '  user-select: text !important;',
             '  -webkit-user-select: text !important;',
             '}',
-            '.radioText { cursor: text !important; }'
+            '.radioText, .checkboxText { cursor: text !important; }'
         ].join('\n');
         document.head.appendChild(selectionStyleEl);
 

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         雨课堂题干与选项拖选复制
 // @namespace    https://github.com/TySchip/yuketang-copy-helper
-// @version      1.0.1
+// @version      1.0.2
 // @description  允许鼠标拖选雨课堂题干和选择题选项，保留原有答题交互；字体反混淆需另行启用
 // @author       TySchip
 // @license      MIT
@@ -23,11 +23,11 @@
     const selectionStyleEl = document.createElement('style');
     selectionStyleEl.id = 'ykt-copy-style';
     selectionStyleEl.textContent = [
-        '.problem-body, .problem-body *, .el-radio, .el-radio * {',
+        '.problem-body, .problem-body *, .el-radio, .el-radio *, .el-checkbox, .el-checkbox * {',
         '  user-select: text !important;',
         '  -webkit-user-select: text !important;',
         '}',
-        '.radioText { cursor: text !important; }'
+        '.radioText, .checkboxText { cursor: text !important; }'
     ].join('\n');
     document.head.appendChild(selectionStyleEl);
 })();
